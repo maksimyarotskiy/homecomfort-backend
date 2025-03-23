@@ -43,7 +43,7 @@ public class CategoryController {
     }
 
     // DELETE /categories/{id} - Обновить категорию
-    @PutMapping("/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategoryById(id);
         return new ResponseEntity<>(HttpStatus.OK);
