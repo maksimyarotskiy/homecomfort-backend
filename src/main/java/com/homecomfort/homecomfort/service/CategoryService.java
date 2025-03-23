@@ -22,24 +22,32 @@ public class CategoryService {
     }
 
     public Category getCategoryById(Long id) {
-        return categoryRepository.findById(id).orElse(null);
+        return categoryRepository.findById(id)
+                .orElseThrow(() -> new CategoryNotFoundException(id));
     }
 
     public Category createCategory(Category category) {
+        if (category == null || category.getName() == null || category.getName().isEmpty()) {
+            throw new IllegalArgumentException("Category or its name cannot be null or empty");
+        }
         return categoryRepository.save(category);
     }
 
     public Category updateCategory(Long id, Category category) {
+        if (category == null || category.getName() == null || category.getName().isEmpty()) {
+            throw new IllegalArgumentException("Category or its name cannot be null or empty");
+        }
         Category categoryForUpdate = categoryRepository.findById(id)
                 .orElseThrow(() -> new CategoryNotFoundException(id));
         categoryForUpdate.setName(category.getName());
         return categoryRepository.save(categoryForUpdate);
     }
 
-    public void deleteCategory(Long id) {
-        Category categoryForDelete = categoryRepository.findById(id)
-                .orElseThrow(() -> new CategoryNotFoundException(id));
-        categoryRepository.delete(categoryForDelete);
+    public void deleteCategoryById(Long id) {
+        if (!categoryRepository.existsById(id)) {
+            throw new CategoryNotFoundException(id);
+        }
+        categoryRepository.deleteById(id);
     }
 
 }

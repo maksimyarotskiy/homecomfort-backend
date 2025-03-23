@@ -1,6 +1,8 @@
 package com.homecomfort.homecomfort.service;
 
+import com.homecomfort.homecomfort.entity.Category;
 import com.homecomfort.homecomfort.entity.Product;
+import com.homecomfort.homecomfort.exception.ProductNotFoundException;
 import com.homecomfort.homecomfort.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +30,19 @@ public class ProductService {
         return productRepository.save(product);
     }
 
+    public Product updateProduct(Long id, Product product) {
+        Product productForUpdate = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+        product.setCategory(product.getCategory());
+        product.setDescription(product.getDescription());
+        product.setName(product.getName());
+        product.setPrice(product.getPrice());
+        return productRepository.save(productForUpdate);
+    }
+
     public void deleteProduct(Long id) {
-        productRepository.deleteById(id);
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(id));
+        productRepository.delete(product);
     }
 }
