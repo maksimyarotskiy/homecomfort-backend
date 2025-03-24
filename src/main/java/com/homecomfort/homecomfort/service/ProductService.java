@@ -33,10 +33,10 @@ public class ProductService {
     public Product updateProduct(Long id, Product product) {
         Product productForUpdate = productRepository.findById(id)
                 .orElseThrow(() -> new ProductNotFoundException(id));
-        product.setCategory(product.getCategory());
-        product.setDescription(product.getDescription());
-        product.setName(product.getName());
-        product.setPrice(product.getPrice());
+        productForUpdate.setCategory(product.getCategory());
+        productForUpdate.setDescription(product.getDescription());
+        productForUpdate.setName(product.getName());
+        productForUpdate.setPrice(product.getPrice());
         return productRepository.save(productForUpdate);
     }
 

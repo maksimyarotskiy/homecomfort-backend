@@ -1,4 +1,4 @@
-package com.homecomfort.homecomfort.conroller;
+package com.homecomfort.homecomfort.controller;
 
 import com.homecomfort.homecomfort.entity.Product;
 import com.homecomfort.homecomfort.service.ProductService;

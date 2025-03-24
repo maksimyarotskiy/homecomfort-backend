@@ -1,4 +1,4 @@
-package com.homecomfort.homecomfort.conroller;
+package com.homecomfort.homecomfort.controller;
 
 import com.homecomfort.homecomfort.entity.Category;
 import com.homecomfort.homecomfort.exception.CategoryNotFoundException;
@@ -46,7 +46,7 @@ public class CategoryController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCategory(@PathVariable Long id) {
         categoryService.deleteCategoryById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @ExceptionHandler(CategoryNotFoundException.class)
