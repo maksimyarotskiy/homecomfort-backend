@@ -31,6 +31,9 @@ public class ProductService {
         if (product == null || product.getName() == null || product.getName().isEmpty()) {
             throw new IllegalArgumentException("Product or its name cannot be null or empty");
         }
+        if (product.getPrice() == null || product.getPrice().compareTo(BigDecimal.ZERO) <= 0) {
+            throw new IllegalArgumentException("Price must be greater than zero");
+        }
         return productRepository.save(product);
     }
 
