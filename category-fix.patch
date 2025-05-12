@@ -1,0 +1,12 @@
+diff --git a/src/main/java/com/homecomfort/homecomfort/controller/CategoryController.java b/src/main/java/com/homecomfort/homecomfort/controller/CategoryController.java
+index e69de29..111222a 100644
+--- a/src/main/java/com/homecomfort/homecomfort/controller/CategoryController.java
++++ b/src/main/java/com/homecomfort/homecomfort/controller/CategoryController.java
+@@ -27,7 +27,8 @@
+     // POST /categories - create category
+-    @PostMapping("/{id}")
++    @PostMapping
+     public ResponseEntity createCategory(@RequestBody Category category) {
+         Category createdCategory = categoryService.createCategory(category);
+         return new ResponseEntity<>(createdCategory, HttpStatus.OK);
+     }
